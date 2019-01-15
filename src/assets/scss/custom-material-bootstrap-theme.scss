@@ -1,0 +1,8 @@
+$custom-material-bootstrap-primary: mat-palette($mat-blue, 800, 300, 900);
+$custom-material-bootstrap-accent: mat-palette($mat-deep-orange);
+$custom-material-bootstrap-warn: mat-palette($mat-red, A200);
+
+$custom-material-bootstrap-theme: mat-light-theme(
+        $custom-material-bootstrap-primary,
+        $custom-material-bootstrap-accent,
+        $custom-material-bootstrap-warn);

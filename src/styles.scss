@@ -1,0 +1,144 @@
+/* You can add global styles to this file, and also import other style files */
+
+// For setup of bootstrap-sass 3.3.7, see --> https://shermandigital.com/blog/bootstrap-sass-with-angular-cli/
+@import "assets/bootstrap-sass/variables";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "~font-awesome/css/font-awesome.min.css";
+@import "~angular2-toaster/toaster.css";
+@import "~suitcss-components-grid/lib/grid.css";
+@import "~suitcss-utils-size/lib/size.css";
+@import "~nouislider/distribute/nouislider.min.css";
+
+// customized Material theme, at least close enough to Bootstrap 3.3.7 theme,
+// rather than using prebuilt themes such as indigo-pink.css
+//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@angular/material/theming";
+@include mat-core();
+@import "assets/scss/custom-material-bootstrap-theme.scss";
+@include angular-material-theme($custom-material-bootstrap-theme);
+
+// bootstrap 3.3.7 theme
+$bootstrap-primary-color:  $brand-primary; // #337ab7;
+$bootstrap-success-color:  $brand-success; // #5cb85c;
+$bootstrap-info-color:     $brand-info;    // #5bc0de;
+$bootstrap-warning-color:  $brand-warning; // #f0ad4e;
+$bootstrap-danger-color:   $brand-danger;  // #d9534f;
+
+/*
+ * These are hacks to get bootstrap-sass 3.3.7 styling applied to Angular Material Design
+ */
+.mat-raised-button.btn-sm {
+    @extend .btn-sm;
+}
+
+.mat-raised-button.btn-sm[disabled] {
+    @extend .mat-raised-button.btn-sm;
+    cursor: not-allowed;
+}
+
+.mat-raised-button.btn-sm.btn-primary {
+    @extend .mat-raised-button.btn-sm;
+    @extend .btn-primary;
+}
+
+.mat-raised-button.btn-sm.btn-primary[disabled] {
+    @extend .mat-raised-button.btn-sm.btn-primary;
+    cursor: not-allowed;
+}
+
+.mat-raised-button.btn-xs {
+    @extend .btn-xs;
+}
+
+.mat-raised-button.btn-xs[disabled] {
+    @extend .mat-raised-button.btn-xs;
+    cursor: not-allowed;
+}
+
+.mat-raised-button.btn-xs.btn-primary {
+    @extend .mat-raised-button.btn-xs;
+    @extend .btn-primary;
+}
+
+.mat-raised-button.btn-xs.btn-primary[disabled] {
+    @extend .mat-raised-button.btn-xs.btn-primary;
+    cursor: not-allowed;
+}
+
+// This is a hack to hide overflow for Angular Material Tabs
+// to work along side with position: sticky for table headers
+mat-tab-header.mat-tab-header,
+div.mat-tab-header-pagination.mat-ripple,
+div.mat-tab-label-container,
+div.mat-tab-label.mat-ripple,
+div.mat-tab-body-wrapper,
+mat-tab-body.mat-tab-body,
+div.mat-tab-body-content,
+mat-tab-body.mat-tab-body.mat-tab-body-active,
+div.mat-tab-body-content.mat-tab-group-dynamic-height,
+mat-tab-body.mat-tab-group.mat-tab-group-dynamic-height,
+div.mat-tab-body-content.ng-trigger.ng-trigger-translateTab,
+mat-tab-body[class*="mat-tab-body"][class*="ng-tns-"],
+mat-tab-body[class*="mat-tab-body"][class*="ng-tns-"][class*="mat-tab-body-active"] {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+}
+
+div.mat-tab-label {
+    opacity: 1;
+    color: $bootstrap-primary-color;
+    font-weight: bold;
+    height: 40px;
+}
+
+div.mat-tab-label.mat-tab-label-active {
+    @extend div.mat-tab-label;
+    color: #fff;
+    border-radius: 6px;
+    border-color: #2e6da4;
+    background-color: $bootstrap-primary-color !important;
+    //background-color: rgba(100, 181, 246, 0.3) !important;
+}
+
+.mat-checkbox-disabled {
+    @extend .mat-checkbox-disabled;
+    color: gray !important;
+    cursor: not-allowed !important;
+}
+
+.mat-checkbox-inner-container {
+    @extend .mat-checkbox-inner-container;
+    height: 15px !important;
+    width: 15px !important;
+}
+
+// This is a hack to hide `overflow` for Angular Material Tabs
+// to work along side with `position: sticky` for table headers
+.body-overflow-x-setting {
+    overflow-x: hidden !important;
+}
+
+li.nav-item.active {
+    font-weight: bold;
+    height: 40px;
+    border-radius: 6px;
+    border-color: #2e6da4;
+}
+
+body {
+    min-width: 1280px;
+    margin: 3px;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+// This is a hack to fix 'Highlighted Option is Un-selectable' bug in ng2-select
+// check if issue will be resolved in newer versions
+// https://github.com/valor-software/ng2-select/issues/736
+.ui-select-choices-row /deep/ .dropdown-item {
+    pointer-events: none !important;
+}
+
+.ui-select-choices /deep/ .ui-select-choices-row {
+    cursor: pointer !important;
+}

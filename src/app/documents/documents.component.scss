@@ -1,0 +1,47 @@
+.document-print-heading {
+    //background: #D6D6D6 url(../../../assets/images/co_headnote_title.png) left top repeat-x;
+    border-style: solid;
+    border-color: #D6D6D6;
+    border-width: 1px 1px 0;
+    padding: 0.2em;
+    position: relative;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 15px;
+    height: 38px;
+}
+
+.document-print-file {
+    width: 35%;
+    padding: 5px;
+    margin: 5px;
+}
+
+.document-print-isPrint {
+    width: 10%;
+    padding: 5px;
+}
+
+.document-print-isColor {
+    width: 10%;
+    padding: 5px;
+}
+
+.document-print-notes {
+    width: 35%;
+    padding: 5px;
+}
+
+.document-select-unselect-checkbox {
+    margin: 2px;
+}
+
+.documents-button-container {
+    margin: 10px;
+    padding-right: 50px;
+}
+
+.documents-input-comments {
+    padding: 5px;
+    width: 600px;
+}

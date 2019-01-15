@@ -1,0 +1,349 @@
+.highlightText {
+  background-color: yellow !important;
+  color: gray !important;
+}
+
+pagination-controls {
+  text-align: right;
+  ul {
+    li {
+      font-size: 12px !important;
+      cursor: pointer;
+    }
+    li.current {
+      background: #f69c55 !important;
+      padding-left: .625rem !important;
+      padding-right: .625rem !important;
+      padding-top: 0px !important;
+      padding-bottom: 0px !important;
+    }
+  }
+}
+
+la-pagination-controls {
+    @extend pagination-controls
+}
+
+.paging-container {
+  float: right;
+  height: 20px;
+  font-weight: normal;
+  font-size: .9em;
+  margin-bottom: 3px;
+}
+.per-page-container {
+  float: right;
+}
+.paging-control {
+  padding: 5px;
+}
+.items-per-page {
+  width: 40px;
+  height:18px;
+  font-size: .7em;
+}
+.items-per-page-label {
+  font-size: 12px;
+  color: dimgray;
+}
+.clear-both {
+  clear: both;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.non-clickable {
+    cursor: not-allowed;
+}
+
+.docket-entry-tree {
+    margin:  3px;
+    border-radius: 5px;
+}
+
+.extracted-entity-tree {
+    margin:  3px 0 3px 25px;
+    border-radius: 5px;
+    list-style-type: none;
+    li {
+        padding: 0;
+    }
+}
+
+.docket-entry-indentation {
+    margin:  3px;
+    border-radius: 5px;
+}
+
+.entity-container-padding {
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.docket-entry-background {
+    @extend .entity-container-padding;
+    background-color: #ffd9b3;
+    color: #333;
+}
+
+.motion-order-indentation {
+    margin:  3px 3px 3px 20px;
+    border-radius: 5px;
+}
+
+.motion-order-background {
+    @extend .entity-container-padding;
+    background-color: #ffd9b3;
+    color: #333;
+}
+
+.motion-order-children-indentation {
+    margin:  3px 3px 3px 50px;
+    border-radius: 5px;
+}
+
+.motion-order-children-background {
+    @extend .entity-container-padding;
+    background-color: #ffd9b3;
+    color: #333;
+}
+
+.entity-unvalidated-background {
+    @extend .entity-container-padding;
+    background-color: #ffd9b3;
+    color: #333;
+}
+
+.entity-validated-background {
+    @extend .entity-container-padding;
+    background-color: #aeeaae;
+    color: #333;
+}
+
+.entity-trainee-publish-background {
+    @extend .entity-container-padding;
+    background-color: #d3b8ea;
+    color: #333;
+}
+
+.entity-marked-for-deletion-background {
+    @extend .entity-container-padding;
+    background-color: rgba(255, 0, 0, 0.60);
+    color: #333;
+}
+
+.entity-diff-background {
+    @extend .entity-container-padding;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.entity-invalidated-background {
+    @extend .entity-container-padding;
+    background-color: #ffb3b3;
+    color: #333;
+}
+
+.docket-entity-parser-deleted {
+    border: 2px solid #ce0623;
+}
+
+.selected-proceeding-chain {
+    border: 2px solid #337ab7;
+}
+
+.input-control-padding {
+    padding: 3px;
+}
+
+.gi-0p5 {
+    font-size: 0.5em;
+}
+
+.gi-0p6 {
+    font-size: 0.6em;
+}
+
+.gi-0p7 {
+    font-size: 0.7em;
+}
+
+.gi-0p8 {
+    font-size: 0.8em;
+}
+
+.gi-0p9 {
+    font-size: 0.9em;
+}
+
+.gi-1x {
+    font-size: 1em;
+}
+
+.gi-1p2 {
+    font-size: 1.2em;
+}
+
+.gi-1p5 {
+    font-size: 1.5em;
+}
+
+.gi-2x {
+    font-size: 2em;
+}
+
+.gi-3x {
+    font-size: 3em;
+}
+.gi-4x {
+    font-size: 4em;
+}
+
+.gi-5x {
+    font-size: 5em;
+}
+
+.fa-icon-create-color {
+    color: #009a03;
+}
+
+.fa-icon-edit-color {
+    color: #00186d;
+}
+
+.fa-icon-delete-color {
+    color: #e23b38;
+}
+
+.overflow-word-wrap {
+    overflow-wrap: break-word;
+}
+
+.spinner-alignment {
+    margin-top: 20px;
+    margin-left: 45%;
+    color: #607D8B;
+}
+
+.defaultHeading {
+    background: #D6D6D6 url(../../assets/images/co_headnote_title.png) left top repeat-x;
+    border-style: solid;
+    border-color: #D6D6D6;
+    border-width: 1px 1px 0;
+    padding: 0.2em;
+    position: relative;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+$tabsHeadingHeight: 45px;
+$docketsHeadingHeight: 38px;
+
+.tabsHeading {
+    @extend .defaultHeading;
+    height: $tabsHeadingHeight;
+    margin-top: 8px;
+}
+
+.docketsHeading {
+    @extend .defaultHeading;
+    height: $docketsHeadingHeight;
+}
+
+.docketsAlertSearch {
+    @extend .docketsHeading;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e23b38;
+    color: white;
+    margin-bottom: 5px;
+    font-weight: normal;
+    font-size: 13px;
+    height: 50px;
+}
+
+.massPublishSummary {
+    @extend .docketsHeading;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: lightgray;
+    color: black;
+    margin-bottom: 5px;
+    font-weight: normal;
+    font-size: 13px;
+    height: auto;
+}
+
+.sticky-container {
+    position: -webkit-sticky;  // required for Safari
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.proceedings-tabs-container-sticky {
+    @extend .sticky-container;
+}
+
+.proceedings-list-container-sticky {
+    @extend .proceedings-tabs-container-sticky;
+    //top: $tabsHeadingHeight; // height of .tabsHeading above ==> make this work
+}
+
+.proceedings-chain-container-sticky {
+    @extend .proceedings-tabs-container-sticky;
+}
+
+.proceedings-list-table-heading-sticky {
+    @extend .proceedings-list-container-sticky;
+    top: $docketsHeadingHeight; // height of .docketsHeading above
+    //top: $tabsHeadingHeight + $docketsHeadingHeight; // height of .tabsHeading + .docketsHeading above ==> make this work
+}
+
+.extracted-annotation-text {
+    color: #000;
+    background-color: #aeeaae;
+}
+
+.history-diff-text {
+    color: #000;
+    background-color: #93c0ea;
+}
+
+
+textarea.proceeding-editor-user-comments {
+    resize: none;
+    width: 100%;
+    padding: 2px;
+}
+
+textarea.proceeding-chain-user-comments  {
+    resize: none;
+    width: 100%;
+    padding: 2px;
+    min-width: 640px;
+    font-weight: normal;
+}
+
+button.entity-toggle {
+    cursor: pointer;
+    font-size: 9px !important;
+    float: right;
+    border: solid 1px #71da71;
+    background-color: #aeeaae;
+    color: dimgray;
+    margin: 1px 5px 0px 0px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 4px;
+}
+
+.disabled {
+    color: gray !important;
+    cursor: not-allowed !important;
+}

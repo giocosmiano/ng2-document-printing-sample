@@ -1,0 +1,18 @@
+<la-exception-handler></la-exception-handler>
+
+<div class="clearfix gradeToolHeader">
+    <div class="pull-left">
+        <h1 class="gradeToolTitle">{{title}}</h1>
+        <div *ngIf="manifestProperties && (manifestProperties.releaseLabel !== null || manifestProperties.releaseDate !== null)" class="release-build">
+            {{manifestProperties.releaseLabel}} ({{manifestProperties.releaseDate}})
+        </div>
+    </div>
+    <div class="pull-right gradeToolUser">
+        <la-user-info></la-user-info>
+    </div>
+</div>
+
+<la-menu-bar></la-menu-bar>
+<la-sign-on *ngIf="authenticationProvider != null && !authenticationProvider.useSafe && authenticationToken === null"></la-sign-on>
+<toaster-container [toasterconfig]="toasterConfig"></toaster-container>
+<router-outlet></router-outlet>
