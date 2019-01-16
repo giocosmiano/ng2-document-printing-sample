@@ -50,7 +50,13 @@ export class DocumentsComponent implements OnInit, OnDestroy {
         .subscribe(entities => {
           if (! _.isEmpty(entities)) {
             this.isDisplayDocuments = true;
-            entities.forEach(entity => this.documentsToPrint.push(entity))
+            entities.forEach(entity => {
+              let documentModel = Object.assign({}, entity);
+              if (_.endsWith(documentModel.filename, ".zip")) {
+                documentModel.filename = `${documentModel.filename}*`;
+              }
+              this.documentsToPrint.push(documentModel)
+            })
           }
         })
     );
@@ -61,7 +67,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   }
 
   isDocumentDisabledForPrinting(documentName: string): boolean {
-    return _.endsWith(documentName, ".zip");
+    return documentName.includes(".zip");
   }
 
   onPageChange(page: number) {
