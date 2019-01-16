@@ -21,8 +21,8 @@
                 <th class="document-print-notes">Notes</th>
             </tr>
             <tr *ngFor="let documentToPrint of documentsToPrint | paginate: paginationSettings; let i = index">
-                <td class="document-print-file" id="document_print_file_{{1+i}}">{{documentToPrint.fileName}}</td>
 
+                <td class="document-print-file" id="document_print_file_{{1+i}}">{{documentToPrint.filename}}</td>
 
                 <td class="document-print-isPrint">
                     <mat-checkbox [id]="'documents_row_' + i + '_isDocumentSelected'"
@@ -30,7 +30,8 @@
                                   title="Select/Un-Select Document"
                                   color="primary"
                                   class="document-select-unselect-checkbox"
-                                  [disabled]="isPrintingInProgress || isDocumentDisabledForPrinting(documentToPrint.fileName)"
+                                  (click)="documentSelectUnSelect()"
+                                  [disabled]="isPrintingInProgress || isDocumentDisabledForPrinting(documentToPrint.filename)"
                                   [(ngModel)]="documentToPrint.print">
                     </mat-checkbox>
                 </td>
@@ -41,14 +42,14 @@
                                   title="Print Document In Color"
                                   color="primary"
                                   class="document-select-unselect-checkbox"
-                                  [disabled]="isPrintingInProgress || isDocumentDisabledForPrinting(documentToPrint.fileName)"
+                                  [disabled]="isPrintingInProgress || isDocumentDisabledForPrinting(documentToPrint.filename)"
                                   [(ngModel)]="documentToPrint.color">
                     </mat-checkbox>
                 </td>
 
                 <td class="document-print-notes">
                     <input [id]="'documents_row_' + i + '_comments'" name="userComments" matInput class="documents-input-comments"
-                           [disabled]="isPrintingInProgress || isDocumentDisabledForPrinting(documentToPrint.fileName)"
+                           [disabled]="isPrintingInProgress || isDocumentDisabledForPrinting(documentToPrint.filename)"
                            [(ngModel)]="documentToPrint.notes">
                 </td>
 
@@ -58,7 +59,7 @@
     <div class="clearfix">
         <div class="pull-right paging-control" *ngIf="displayPaginationControl">
             <pagination-controls [id]="paginationSettings.id"
-                                 [maxSize]="11"
+                                 [maxSize]="15"
                                  [directionLinks]="true"
                                  [autoHide]="false"
                                  (pageChange)="onPageChange($event)"></pagination-controls>
@@ -71,10 +72,12 @@
                 <span>*File is not compatible with Print Center</span>
             </div>
             <div class="pull-right">
-                <button id="submitPrinting" type="button" class="btn btn-sm btn-primary" mat-raised-button (click)="saveOrApplyFilters('saveFilters')" [disabled]="isUpdateInProgress">
+                <button id="submitPrinting" type="button" class="btn btn-sm btn-primary"
+                        mat-raised-button (click)="submitPrinting()" [disabled]="isPrintingInProgress || ! hasDocumentSelected">
                     <span class="glyphicon glyphicon-circle-arrow-up"></span> Submit
                 </button>
-                <button id="cancelPrinting" type="button" class="btn btn-sm btn-default" mat-raised-button (click)="cancelPrinting()" [disabled]="isUpdateInProgress">
+                <button id="cancelPrinting" type="button" class="btn btn-sm btn-default"
+                        mat-raised-button (click)="cancelPrinting()" [disabled]="isUpdateInProgress">
                     <span class="glyphicon glyphicon-refresh"></span> Cancel
                 </button>
             </div>

@@ -1,8 +1,11 @@
 import {DocumentModel} from "./document.model";
 
-export interface PrintJobDTO {
-  deliverTo: String;
-  instructions: Boolean;
-  notes: String;
+export interface PrintRequestDTO {
+  deliverTo: string;
+  instructions: string;
+  documents: DocumentsToPrintDTO;
+}
+
+export interface DocumentsToPrintDTO {
   documents: Array<DocumentModel>;
 }

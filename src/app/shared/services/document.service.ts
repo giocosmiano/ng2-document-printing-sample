@@ -27,7 +27,7 @@ export class DocumentService extends AbstractService<DocumentModel> {
         .forEach(doc => {
           documentRetrieved = <DocumentModel>{};
           documentRetrieved.uuid = doc;
-          documentRetrieved.fileName = documentRetrieved.uuid;
+          documentRetrieved.filename = documentRetrieved.uuid;
           documentRetrieved.print = false;
           documentRetrieved.color = false;
           documentRetrieved.notes = "";

@@ -11,7 +11,7 @@ import {DOCUMENT_MODEL_ENTITY} from "../../core/entity.constants";
 import * as _ from "lodash";
 
 export interface DocumentModel extends BaseEntity {
-  fileName: string;
+  filename: string;
   print: boolean;
   color: boolean;
   notes: string;
