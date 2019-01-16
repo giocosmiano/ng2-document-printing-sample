@@ -19,12 +19,23 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   hasDocumentSelected: boolean = false;
   isPrintingInProgress:boolean = false;
   displayPaginationControl: boolean = true;
+  itemsPerPage: number = 50;
+  MAX_ENTRIES_PER_PAGE: number = 50;
+  DEFAULT_ENTRIES_PER_PAGE: number = 50;
+  userComments: string = "";
+  userCommentsNotes: string = "If you have any specific instructions pertinent to your entire order, please enter them here...";
+
+  deliverToMeetingOwner: string = "Meeting Owner";
+  deliverToMeetingRoom: string = "Meeting Room";
+  deliverToMeetingOwnerText: string = `${this.deliverToMeetingOwner} - Delivery will occur one business day prior to the meeting time.`;
+  deliverToMeetingRoomText: string = `${this.deliverToMeetingRoom} - Delivery will occur 15 minutes prior to the meeting time.`;
+  deliveryToOption: string = this.deliverToMeetingOwner;
 
   private _subscriptions: Subscription[] = [];
 
   paginationSettings: PaginationInstance = {
     id: "paginateReportStatuses",
-    itemsPerPage: 10,
+    itemsPerPage: this.itemsPerPage,
     currentPage: 1,
   };
 

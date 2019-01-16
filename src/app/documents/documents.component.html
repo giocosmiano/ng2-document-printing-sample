@@ -6,9 +6,36 @@
         <div class="paging-container">
             <div class="per-page-container">
                 <span class="items-per-page-label">entries per page: </span>
-                <input type="number" min="1" max="{{MAX_ENTRIES_PER_PAGE}}" #perPage class="items-per-page" [(ngModel)]="itemsPerPage"
-                       (input)="onItemsPerPageChange(perPage.value)"/>
+                <input type="number" min="1" max="{{MAX_ENTRIES_PER_PAGE}}" #perPage class="items-per-page" [(ngModel)]="itemsPerPage"/>
             </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="documents-option-container clearfix">
+            <span>In order for the Print Center to best serve you, please fill in the information below</span>
+        </div>
+        <div class="documents-option-container clearfix">
+            <label class="form-field-label" for="deliveryToOption">Deliver To:</label><br/>
+            <mat-radio-group [(ngModel)]="deliveryToOption"
+                             id="deliveryToOption" name="deliveryToOption" required="true">
+                <mat-radio-button [value]="deliverToMeetingOwner"
+                                  [disabled]="isPrintingInProgress"
+                                  class="input-filter-position-override filter-container-margins"
+                                  color="primary">{{deliverToMeetingOwnerText}}
+                </mat-radio-button><br/>
+                <mat-radio-button [value]="deliverToMeetingRoom"
+                                  [disabled]="isPrintingInProgress"
+                                  class="input-filter-position-override filter-container-margins"
+                                  color="primary">{{deliverToMeetingRoomText}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="documents-option-container clearfix">
+            <textarea name="userComments" class="proceeding-editor-user-comments" autofocus rows="3"
+                      [placeholder]="userCommentsNotes"
+                      [disabled]="isPrintingInProgress" [(ngModel)]="userComments"></textarea>
+            <br/>
         </div>
     </div>
 
