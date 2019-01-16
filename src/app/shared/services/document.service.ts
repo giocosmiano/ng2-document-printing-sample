@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
-import {AbstractService} from "../../core/abstract.service";
-import {Http} from "@angular/http";
+import {AbstractService, HEADER_OPTION} from "../../core/abstract.service";
+import {Http, Response} from "@angular/http";
 import {DocumentActions} from "../actions/document.actions";
 import {DocumentModel, DocumentsRetrievedModel} from "../models/document.model";
 import {DOCUMENTS_RETRIEVED_MODEL_ENTITY} from "../../core/entity.constants";
+import {PrintRequestDTO} from "../models/print-job-request.model";
 
 @Injectable()
 export class DocumentService extends AbstractService<DocumentModel> {
@@ -16,6 +17,11 @@ export class DocumentService extends AbstractService<DocumentModel> {
   getRestEndpoint(params?: string): string {
     let environment = this.getEnvironment();
     return `${environment.baseURL}${environment.documentsEndpoint}`;
+  }
+
+  postRestEndpoint(params?: string): string {
+    let environment = this.getEnvironment();
+    return `${environment.baseURL}${environment.printJobsEndpoint}`;
   }
 
   postGet(documentsRetrievedModel: DocumentsRetrievedModel, parentId?:string) {
@@ -35,5 +41,42 @@ export class DocumentService extends AbstractService<DocumentModel> {
         });
       super.postGet(documentsRetrieved, parentId);
     }
+  }
+
+  submitPrinting(printRequestDTO: PrintRequestDTO, onSuccess?:Function, onFailure?:Function) {
+    let endpoint = this.postRestEndpoint();
+    this._http.put(endpoint,
+      printRequestDTO,
+      HEADER_OPTION)
+      .map((response:Response) => response.json()).subscribe(
+      response => {
+        if (onSuccess) {
+          onSuccess(response);
+        }
+      },
+      error => {
+        if (onFailure) {
+          onFailure(error);
+        }
+      }
+    );
+  }
+
+  cancelPrinting(onSuccess?:Function, onFailure?:Function) {
+    let endpoint = this.postRestEndpoint();
+    this._http.delete(endpoint,
+      HEADER_OPTION)
+      .map((response:Response) => response.json()).subscribe(
+      response => {
+        if (onSuccess) {
+          onSuccess(response);
+        }
+      },
+      error => {
+        if (onFailure) {
+          onFailure(error);
+        }
+      }
+    );
   }
 }

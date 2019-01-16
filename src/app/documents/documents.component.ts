@@ -3,11 +3,13 @@ import {Subscription} from "rxjs/Subscription";
 import {PaginationInstance} from "ngx-pagination";
 import {DocumentModel, DocumentSelectors} from "../shared/models/document.model";
 import {DocumentsToPrintDTO, PrintRequestDTO} from "../shared/models/print-job-request.model";
+import {DocumentService} from "../shared/services/document.service";
+import {Toast, ToasterService} from "angular2-toaster";
 
 import * as _ from "lodash";
 
 @Component({
-  selector: "la-document-printing",
+  selector: "gio-document-printing",
   templateUrl: "documents.component.html",
   styleUrls: ["documents.component.scss"],
 })
@@ -26,7 +28,9 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     currentPage: 1,
   };
 
-  constructor(private _documentSelectors: DocumentSelectors) {
+  constructor(private _documentSelectors: DocumentSelectors,
+              private _documentService: DocumentService,
+              private _toasterService: ToasterService) {
   }
 
   ngOnInit(): void {
@@ -49,6 +53,12 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     return _.endsWith(documentName, ".zip");
   }
 
+  onPageChange(page: number) {
+    setTimeout(() => {
+      this.paginationSettings.currentPage = page;
+    }, 50);
+  }
+
   // put this click event callback at the end of event loop
   documentSelectUnSelect(): void {
     setTimeout(() => {
@@ -60,17 +70,41 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   }
 
   cancelPrinting(): void {
-    this.hasDocumentSelected = false;
-    this.documentsToPrint
-      .forEach(doc => {
-        doc.print = false;
-        doc.color = false;
-        doc.notes = "";
+    let toast: Toast;
+    this._documentService.cancelPrinting(
+      data => {
+        let bodyMsg = "",
+          printJobId = data["printJobId"];
+        if (_.has(data, "msg")) {
+          bodyMsg = data["msg"];
+        } else {
+          bodyMsg = `Printing has been cancelled with confirmation # ${printJobId}`;
+        }
+        this._toasterService.clear();
+        toast = {
+          type: "success",
+          title: "Document Printing",
+          body: bodyMsg,
+          showCloseButton: false
+        };
+        this._toasterService.pop(toast);
+      },
+      error => {
+        this._toasterService.clear();
+        toast = {
+          type: "error",
+          title: "Document Printing",
+          body: "Documents printing cancellation request has failed. Try again later.",
+          showCloseButton: false
+        };
+        this._toasterService.pop(toast);
       });
   }
 
   submitPrinting(): void {
-    let printRequestDTO: PrintRequestDTO = <PrintRequestDTO>{},
+    this.isPrintingInProgress = true;
+    let toast: Toast,
+      printRequestDTO: PrintRequestDTO = <PrintRequestDTO>{},
       documentsToPrintDTO: DocumentsToPrintDTO = <DocumentsToPrintDTO>{};
 
     documentsToPrintDTO.documents = this.documentsToPrint.filter(doc => doc.print);
@@ -79,29 +113,28 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     printRequestDTO.documents = documentsToPrintDTO;
     console.log("debugging");
 
-    /*
-          userRequestDTO.user.userPreferences = JSON.stringify(this.userPreference);
-          this._userService.postUpdateUser(userRequestDTO,
-            data => {
-              this._toasterService.clear();
-              toast = {
-                type: "success",
-                title: "Docket Filters",
-                body: "Save request has been sent.",
-                showCloseButton: false
-              };
-              this._toasterService.pop(toast);
-            },
-            error => {
-              this._toasterService.clear();
-              toast = {
-                type: "error",
-                title: "Docket Filters",
-                body: "Docket filters were not saved. Try again later.",
-                showCloseButton: false
-              };
-              this._toasterService.pop(toast);
-            });
-    */
+    this._documentService.submitPrinting(printRequestDTO,
+      data => {
+        this.isPrintingInProgress = false;
+        this._toasterService.clear();
+        toast = {
+          type: "success",
+          title: "Document Printing",
+          body: `Printing documents with confirmation # ${data["requestConfirmation"]["printJobId"]}`,
+          showCloseButton: false
+        };
+        this._toasterService.pop(toast);
+      },
+      error => {
+        this.isPrintingInProgress = false;
+        this._toasterService.clear();
+        toast = {
+          type: "error",
+          title: "Document Printing",
+          body: "Printing documents request has failed. Try again later.",
+          showCloseButton: false
+        };
+        this._toasterService.pop(toast);
+      });
   }
 }

@@ -22,7 +22,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "la",
+      "prefix": "gio",
       "styles": [
         "assets/scss/main.scss",
         "styles.scss"

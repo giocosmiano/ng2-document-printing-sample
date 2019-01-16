@@ -9,7 +9,7 @@ import {DocumentService} from "./shared/services/document.service";
 import {DocumentActions} from "./shared/actions/document.actions";
 
 @Component({
-  selector: "la-solu-sample-app",
+  selector: "gio-sample-app",
   templateUrl: "app.component.html",
   styleUrls: ["app.component.scss"],
 })

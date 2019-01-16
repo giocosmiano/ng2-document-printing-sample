@@ -1,4 +1,4 @@
-<la-exception-handler></la-exception-handler>
+<gio-exception-handler></gio-exception-handler>
 
 <div class="clearfix gradeToolHeader">
     <div class="pull-left">
@@ -8,11 +8,11 @@
         </div>
     </div>
     <div class="pull-right gradeToolUser">
-        <la-user-info></la-user-info>
+        <gio-user-info></gio-user-info>
     </div>
 </div>
 
-<la-menu-bar></la-menu-bar>
-<la-sign-on *ngIf="authenticationProvider != null && !authenticationProvider.useSafe && authenticationToken === null"></la-sign-on>
+<gio-menu-bar></gio-menu-bar>
+<gio-sign-on *ngIf="authenticationProvider != null && !authenticationProvider.useSafe && authenticationToken === null"></gio-sign-on>
 <toaster-container [toasterconfig]="toasterConfig"></toaster-container>
 <router-outlet></router-outlet>

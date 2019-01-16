@@ -26,7 +26,6 @@ import {dbInitialState} from "./core/reducers/db-state.reducer";
 import {uiInitialState} from "./core/reducers/ui-state.reducer";
 import {Angular2FontawesomeModule} from "angular2-fontawesome";
 import {ToasterModule} from "angular2-toaster";
-import {SoluRoutingModule} from "./app-routing.module";
 import {
   AlertModule,
   BsDropdownModule,
@@ -37,7 +36,8 @@ import {
 import {NgxPaginationModule} from "ngx-pagination";
 import {SelectModule} from "ng2-select";
 import {DocumentsModule} from "./documents/documents.module";
-import {SoluAuthenticationModule} from "./authentication";
+import {AppAuthenticationModule} from "./authentication";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -70,8 +70,8 @@ import {SoluAuthenticationModule} from "./authentication";
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 20 }) : [],
 
     DocumentsModule,
-    SoluRoutingModule,
-    SoluAuthenticationModule,
+    AppRoutingModule,
+    AppAuthenticationModule,
   ],
   providers: [
     Title,

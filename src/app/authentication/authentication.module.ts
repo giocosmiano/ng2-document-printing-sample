@@ -30,4 +30,4 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
     },
   ],
 })
-export class SoluAuthenticationModule { }
+export class AppAuthenticationModule { }
