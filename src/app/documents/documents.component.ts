@@ -125,8 +125,8 @@ export class DocumentsComponent implements OnInit, OnDestroy {
       documentsToPrintDTO: DocumentsToPrintDTO = <DocumentsToPrintDTO>{};
 
     documentsToPrintDTO.documents = this.documentsToPrint.filter(doc => doc.print);
-    printRequestDTO.deliverTo = "";
-    printRequestDTO.instructions = "";
+    printRequestDTO.deliverTo = this.deliveryToOption;
+    printRequestDTO.instructions = this.userComments;
     printRequestDTO.documents = documentsToPrintDTO;
     console.log("debugging");
 
