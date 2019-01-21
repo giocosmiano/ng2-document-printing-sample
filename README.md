@@ -9,10 +9,10 @@ It employs the following technical stack:
 
 ## Getting Started
 ### Dependencies
- - Node version 6.11.2
- - NPM version 3.10.10
- - Angular version 4.4.4 --> see `https://github.com/angular/angular/blob/4.4.x/package.json`
- - Angular-CLI version 1.3.2
+ - [Node version 6.11.2](https://nodejs.org/en/download/releases/)
+ - [NPM version 3.10.10](https://nodejs.org/en/download/releases/)
+ - [Angular version 4.4.4](https://github.com/angular/angular/blob/4.4.x/package.json)
+ - [Angular-CLI version 1.3.2](https://github.com/angular/angular-cli/tree/1.3.x)
  - A Modern IDE
 
 ## Development server
