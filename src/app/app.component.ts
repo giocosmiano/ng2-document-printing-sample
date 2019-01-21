@@ -16,7 +16,6 @@ import {DocumentActions} from "./shared/actions/document.actions";
 export class AppComponent implements OnInit, OnDestroy {
   title = "Document Printing Center";
   requestedRoute: string;
-  private isDocumentsRetrieved: boolean;
   private viewContainerRef: ViewContainerRef;
   private _subscriptions:Subscription[] = [];
 
@@ -31,6 +30,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this._documentActions.dispatchUnsetPrintingJobInProgressAction();
+    this._documentActions.dispatchUnsetDocumentsRetrievedAction();
+
     this._subscriptions.push(
       this._documentSelectors.isDocumentsRetrieved$
         .subscribe(isDocumentsRetrieved => {

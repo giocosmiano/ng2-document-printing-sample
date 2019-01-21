@@ -17,7 +17,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   documentsToPrint: Array<DocumentModel> = [];
   isDisplayDocuments: boolean = false;
   hasDocumentSelected: boolean = false;
-  isPrintingInProgress:boolean = false;
+  isPrintingJobInProgress:boolean = false;
   displayPaginationControl: boolean = true;
   itemsPerPage: number = 50;
   MAX_ENTRIES_PER_PAGE: number = 50;
@@ -45,6 +45,12 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._subscriptions.push(
+      this._documentSelectors.isPrintingJobInProgress$
+        .subscribe(isPrintingJobInProgress =>
+          this.isPrintingJobInProgress = isPrintingJobInProgress)
+    );
+
     this._subscriptions.push(
       this._documentSelectors.entities$()
         .subscribe(entities => {
@@ -119,7 +125,6 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   }
 
   submitPrinting(): void {
-    this.isPrintingInProgress = true;
     let toast: Toast,
       printRequestDTO: PrintRequestDTO = <PrintRequestDTO>{},
       documentsToPrintDTO: DocumentsToPrintDTO = <DocumentsToPrintDTO>{};
@@ -132,7 +137,6 @@ export class DocumentsComponent implements OnInit, OnDestroy {
 
     this._documentService.submitPrinting(printRequestDTO,
       data => {
-        this.isPrintingInProgress = false;
         this._toasterService.clear();
         toast = {
           type: "success",
@@ -143,7 +147,6 @@ export class DocumentsComponent implements OnInit, OnDestroy {
         this._toasterService.pop(toast);
       },
       error => {
-        this.isPrintingInProgress = false;
         this._toasterService.clear();
         toast = {
           type: "error",

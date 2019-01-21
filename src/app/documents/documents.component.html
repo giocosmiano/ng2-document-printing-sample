@@ -20,12 +20,12 @@
             <mat-radio-group [(ngModel)]="deliveryToOption"
                              id="deliveryToOption" name="deliveryToOption" required="true">
                 <mat-radio-button [value]="deliverToMeetingOwner"
-                                  [disabled]="isPrintingInProgress"
+                                  [disabled]="isPrintingJobInProgress"
                                   class="input-filter-position-override filter-container-margins"
                                   color="primary">{{deliverToMeetingOwnerText}}
                 </mat-radio-button><br/>
                 <mat-radio-button [value]="deliverToMeetingRoom"
-                                  [disabled]="isPrintingInProgress"
+                                  [disabled]="isPrintingJobInProgress"
                                   class="input-filter-position-override filter-container-margins"
                                   color="primary">{{deliverToMeetingRoomText}}
                 </mat-radio-button>
@@ -34,7 +34,7 @@
         <div class="documents-option-container clearfix">
             <textarea name="userComments" class="proceeding-editor-user-comments" autofocus rows="3"
                       [placeholder]="userCommentsNotes"
-                      [disabled]="isPrintingInProgress" [(ngModel)]="userComments"></textarea>
+                      [disabled]="isPrintingJobInProgress" [(ngModel)]="userComments"></textarea>
             <br/>
         </div>
     </div>
@@ -58,7 +58,7 @@
                                   color="primary"
                                   class="document-select-unselect-checkbox"
                                   (click)="documentSelectUnSelect()"
-                                  [disabled]="isPrintingInProgress || isDocumentDisabledForPrinting(documentToPrint.filename)"
+                                  [disabled]="isPrintingJobInProgress || isDocumentDisabledForPrinting(documentToPrint.filename)"
                                   [(ngModel)]="documentToPrint.print">
                     </mat-checkbox>
                 </td>
@@ -69,14 +69,14 @@
                                   title="Print Document In Color"
                                   color="primary"
                                   class="document-select-unselect-checkbox"
-                                  [disabled]="isPrintingInProgress || isDocumentDisabledForPrinting(documentToPrint.filename)"
+                                  [disabled]="isPrintingJobInProgress || isDocumentDisabledForPrinting(documentToPrint.filename)"
                                   [(ngModel)]="documentToPrint.color">
                     </mat-checkbox>
                 </td>
 
                 <td class="document-print-notes">
                     <input [id]="'documents_row_' + i + '_comments'" name="userComments" matInput class="documents-input-comments"
-                           [disabled]="isPrintingInProgress || isDocumentDisabledForPrinting(documentToPrint.filename)"
+                           [disabled]="isPrintingJobInProgress || isDocumentDisabledForPrinting(documentToPrint.filename)"
                            [(ngModel)]="documentToPrint.notes">
                 </td>
 
@@ -100,7 +100,7 @@
             </div>
             <div class="pull-right">
                 <button id="submitPrinting" type="button" class="btn btn-sm btn-primary"
-                        mat-raised-button (click)="submitPrinting()" [disabled]="isPrintingInProgress || ! hasDocumentSelected">
+                        mat-raised-button (click)="submitPrinting()" [disabled]="isPrintingJobInProgress || ! hasDocumentSelected">
                     <span class="glyphicon glyphicon-circle-arrow-up"></span> Submit
                 </button>
                 <button id="cancelPrinting" type="button" class="btn btn-sm btn-default"

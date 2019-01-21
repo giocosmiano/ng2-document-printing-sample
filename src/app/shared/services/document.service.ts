@@ -40,11 +40,13 @@ export class DocumentService extends AbstractService<DocumentModel> {
           documentsRetrieved.push(documentRetrieved);
         });
       super.postGet(documentsRetrieved, parentId);
+      this.actionCreator.dispatchSetDocumentsRetrievedAction();
     }
   }
 
   submitPrinting(printRequestDTO: PrintRequestDTO, onSuccess?:Function, onFailure?:Function) {
     let endpoint = this.postRestEndpoint();
+    this.actionCreator.dispatchSetPrintingJobInProgressAction();
     this._http.put(endpoint,
       printRequestDTO,
       HEADER_OPTION)
@@ -53,17 +55,20 @@ export class DocumentService extends AbstractService<DocumentModel> {
         if (onSuccess) {
           onSuccess(response);
         }
+        this.actionCreator.dispatchUnsetPrintingJobInProgressAction();
       },
       error => {
         if (onFailure) {
           onFailure(error);
         }
+        this.actionCreator.dispatchUnsetPrintingJobInProgressAction();
       }
     );
   }
 
   cancelPrinting(onSuccess?:Function, onFailure?:Function) {
     let endpoint = this.postRestEndpoint();
+    this.actionCreator.dispatchSetPrintingJobInProgressAction();
     this._http.delete(endpoint,
       HEADER_OPTION)
       .map((response:Response) => response.json()).subscribe(
@@ -71,11 +76,13 @@ export class DocumentService extends AbstractService<DocumentModel> {
         if (onSuccess) {
           onSuccess(response);
         }
+        this.actionCreator.dispatchUnsetPrintingJobInProgressAction();
       },
       error => {
         if (onFailure) {
           onFailure(error);
         }
+        this.actionCreator.dispatchUnsetPrintingJobInProgressAction();
       }
     );
   }

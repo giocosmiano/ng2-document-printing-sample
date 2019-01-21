@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Store} from "@ngrx/store";
+import {Store, Action} from "@ngrx/store";
 
 import {AppStore} from "../../core/app.store";
 import {AbstractActions} from "../../core/abstract.actions";
@@ -24,5 +24,41 @@ export class DocumentActions extends AbstractActions<DocumentModel> {
 
   getParentEntityName():string {
     return undefined;
+  }
+
+  dispatchSetDocumentsRetrievedAction() {
+    this._store.dispatch(<Action>{
+      type: `SET_${DOCUMENT_MODEL_ENTITY}_RETRIEVED`,
+      payload: {
+        isDocumentsRetrieved: true,
+      },
+    });
+  }
+
+  dispatchUnsetDocumentsRetrievedAction() {
+    this._store.dispatch(<Action>{
+      type: `UNSET_${DOCUMENT_MODEL_ENTITY}_RETRIEVED`,
+      payload: {
+        isDocumentsRetrieved: false,
+      },
+    });
+  }
+
+  dispatchSetPrintingJobInProgressAction() {
+    this._store.dispatch(<Action>{
+      type: `SET_${DOCUMENT_MODEL_ENTITY}_PRINTING_IN_PROGRESS`,
+      payload: {
+        isPrintingJobInProgress: true,
+      },
+    });
+  }
+
+  dispatchUnsetPrintingJobInProgressAction() {
+    this._store.dispatch(<Action>{
+      type: `UNSET_${DOCUMENT_MODEL_ENTITY}_PRINTING_IN_PROGRESS`,
+      payload: {
+        isPrintingJobInProgress: false,
+      },
+    });
   }
 }
